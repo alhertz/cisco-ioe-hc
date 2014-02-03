@@ -1,0 +1,677 @@
+$navbar-height: 84px;
+$brand-primary: #00adee;
+
+$gradient-light: #00adee;
+$gradient-dark: #0067ab;
+
+// Core variables and mixins
+@import 'sass-bootstrap/lib/variables';
+@import 'sass-bootstrap/lib/mixins';
+
+// Reset
+@import 'sass-bootstrap/lib/normalize';
+@import 'sass-bootstrap/lib/print';
+
+// Core CSS
+@import 'sass-bootstrap/lib/scaffolding';
+@import 'sass-bootstrap/lib/type';
+@import 'sass-bootstrap/lib/grid';
+@import 'sass-bootstrap/lib/buttons';
+
+// Components
+@import 'sass-bootstrap/lib/navbar';
+@import 'sass-bootstrap/lib/thumbnails';
+@import 'sass-bootstrap/lib/close';
+
+// Utility classes
+@import 'sass-bootstrap/lib/utilities';
+@import 'sass-bootstrap/lib/responsive-utilities';
+
+// Mixins
+@mixin color-gradient-bg {
+  background: $brand-primary; /* Old browsers */
+  background: -moz-linear-gradient(45deg, $gradient-dark 0%, $gradient-light 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, $gradient-dark), color-stop(100%, $gradient-light)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg, $gradient-dark 0%, $gradient-light 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg, $gradient-dark 0%, $gradient-light 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg, $gradient-dark 0%, $gradient-light 100%); /* IE10+ */
+  background: linear-gradient(45deg, $gradient-dark 0%, $gradient-light 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-dark', endColorstr='$gradient-light',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+}
+@mixin grayscale-gradient-bg {
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ffffff 0%, #eeeeee 25%, #eeeeee 75%, #ffffff 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(25%,#eeeeee), color-stop(75%,#eeeeee), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #ffffff 0%,#eeeeee 25%,#eeeeee 75%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #ffffff 0%,#eeeeee 25%,#eeeeee 75%,#ffffff 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #ffffff 0%,#eeeeee 25%,#eeeeee 75%,#ffffff 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #ffffff 0%,#eeeeee 25%,#eeeeee 75%,#ffffff 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+@mixin text-gradient {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@mixin box-shadow {
+  -webkit-box-shadow: 0 0 6px 0 rgba(0,0,0,.3);
+  box-shadow: 0 0 6px 0 rgba(0,0,0,.3);
+}
+@mixin smooth-trans {
+  -webkit-transition: all 500ms ease-in;
+  -moz-transition: all 500ms ease-in;
+  -ms-transition: all 500ms ease-in;
+  -o-transition: all 500ms ease-in;
+  transition: all 500ms ease-in;
+}
+
+// Global
+html, body,
+#scenario-1 { 
+  height: 100%; 
+  overflow: show; 
+  font-weight: 400;
+}
+body {
+  line-height: 1.5;
+  @media (min-width: $screen-lg-min) {
+    font-size: 18px;
+  }
+}
+h1,h2,h3,h4,h5, .lead {
+  font-weight: 300;
+}
+.img-responsive {
+  width: 100%;
+}
+.img-thumbnail {
+  border-radius: 0;
+}
+.img-circle {
+  @include box-shadow();
+  border: 5px solid #f5f5f5;
+  &.img-sm {
+    max-width: 25%;
+    height: auto;
+    visibility: hidden;
+  }
+  &.img-md {
+    max-width: 40%;
+    height: auto;
+    visibility: hidden;
+  }
+  &.img-lg {
+    visibility: hidden;
+  }
+}
+.lead {
+  font-size: 1.5em !important;
+}
+.btn-primary {
+  font-weight: 300;
+  border: none;
+  &:hover {
+    background: $gradient-dark;
+    @include smooth-trans;
+  }
+}
+.btn-default {
+  background: transparent;
+  border: 3px solid #FFF;
+  color: #FFF;
+  &:hover {
+    border-color: $body-bg;
+    color: $body-bg;
+    background: transparent;
+    opacity: .7;
+    @include smooth-trans;
+  }
+}
+.text-gradient {
+  background: -webkit-linear-gradient(45deg, $gradient-light 0%, $gradient-dark 100%);
+  background: -moz-linear-gradient(45deg, $gradient-light 0%, $gradient-dark 100%);
+  background: -o-linear-gradient(45deg, $gradient-light 0%, $gradient-dark 100%);
+  background: linear-gradient(45deg, $gradient-light 0%, $gradient-dark 100%);
+  @include text-gradient();
+}
+// Disable text gradient on FF & IE
+.lt-ie9 .text-gradient,
+.no-flexbox .text-gradient {
+  color: $brand-primary;
+  filter: none; // IE
+  background: $body-bg; // FF
+}
+// Hide complementary images and tooltips on IE8
+.lt-ie9 .tooltip,
+.lt-ie9 .img-sm,
+.lt-ie9 .img-md,
+.lt-ie9 .img-icon {
+  width: 1px;
+  height: 1px;
+  display: none;
+}
+
+// Navbar
+.navbar {
+  border-radius: 0;
+  border: none;
+  position: fixed;
+  z-index: 9;
+  width: 100%;
+  margin: 0;
+  @media (max-width: $screen-md-min) {
+    position: relative;
+  }
+  &.navbar-inverse {
+    background: #000;
+  }
+  & > .container  {
+    .navbar-brand {
+      width: 80px;
+      height: $navbar-height;
+      margin-left: 0;
+      img {
+        margin-top: -7px;
+        max-width: 70px;
+      }
+      &:hover {
+        opacity: .9;
+        cursor: pointer;
+      }
+      @media (max-width: $screen-md-min) {
+        width: 60px;
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+    }
+  }
+  .navbar-text {
+    margin-bottom: 0;
+    color: #FFF;
+    margin-top: 32px;
+    @media (max-width: $screen-md-min) {
+      float: right;
+      margin-right: 15px;
+    }
+  }
+}
+// Scenario Nav
+.scenarios {
+  // Navigation
+  & > nav {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 2%;
+    @include smooth-trans();
+    a {
+      outline: 0;
+      display: block;
+      position: relative;
+      color: transparent;
+      height: 35px;
+      &:after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 1px solid #CCC;
+      }
+      &:hover:after {
+        background: #CCC;
+      }
+      &.scenario-current:after {
+        border: 7px solid $gradient-light;
+        margin-left: -2px;
+        margin-top: -2px;
+      }
+      &.scenario-current.first:after {
+        border-color: #FFF;
+        background: #FFF;
+      }
+    }
+    .tooltip {
+      opacity: 0;
+      @include smooth-trans;
+      position: absolute;
+      font-size: 12px;
+      line-height: 1.4;
+      &.left {
+        margin-top: -9px;
+        margin-left: -205px;
+        padding: 0 5px;
+        width: 190px;
+      }
+      .tooltip-inner {
+        background: $brand-primary;
+        padding: 8px 15px;
+        color: #FFF;
+        border-radius: $border-radius-base;
+        span {
+          font-weight: bold;
+          border-right: 1px solid darken(#FFF, 10%);
+          padding-right: 5px;
+          margin-right: 3px;
+        }
+      }
+      .tooltip-arrow {
+        border-left-color: $brand-primary;
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        top: 50%;
+        right: 0;
+        margin-top: -5px;
+        border-width: 5px 0 5px 5px;
+      }
+      @media (max-width: $screen-md-min) {
+        display: none;
+      }
+    }
+    // Position menu at bottom of screen on small devices
+    @media (max-width: $screen-md-min) {
+      display: none !important;
+      @include box-shadow();
+      right: 0;
+      bottom: 0;
+      top: 93%;
+      background: #FFF;
+      width: 100%;
+      height: 7%;
+      -webkit-transform: translateY(0%);
+      -moz-transform: translateY(0%);
+      -ms-transform: translateY(0%);
+      transform: translateY(0%);
+      a {
+        height: 100%;
+        display: inline-block;
+        width: 16%;
+        &:after {
+          left: 50%;
+          top: 50%;
+          margin-top: -5px;
+          margin-left: -5px;
+        }
+      }
+    }
+  }
+  section {
+    position: relative;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    @media (max-width: $screen-md-min) {
+      height: auto;
+    }
+  }
+}
+// Downward Arrow in Scenario One
+#arrow.light {
+  background: url("../images/arrow-light.png") no-repeat;
+  background-size: 100% auto;
+  height: 226px;
+  width: 47px;
+  background-position: bottom center;
+  right: 0;
+  top: 0;
+  opacity: .5;
+  position: absolute;
+  top: 50%;
+  margin-top: -113px;
+  margin-right: 72px;
+  z-index: 8;
+  &:hover {
+    cursor: pointer;
+    opacity: 1.0;
+    @include smooth-trans;
+  }
+  @media all and (max-width: $screen-md-min) {
+    display: none;
+  }
+}
+// Scenario One
+#scenario-1 {
+  color: #FFF; 
+  padding-top: $navbar-height;
+  @include color-gradient-bg();
+  .content,
+  .secondary-content {
+    display: none;
+  }
+  .content {
+    padding-top: 4.0em;
+    .secondary-content {
+      padding-top: 2.0em;
+      .lead.text-muted {
+        color: $body-bg;
+        opacity: .7;
+        font-size: 1.3em;
+        line-height: 1.1;
+      }
+      .btn-default {
+        margin-bottom: 170px;
+      }
+    }
+  }
+  @media all and (max-width: $screen-md-min) {
+    padding-top: 0;
+    min-height: 0 !important;
+    .content {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      h2 {
+        font-size: 1.5em;
+      }
+      img {
+        display: none;
+      }
+      .img-circle {
+        margin: 0 auto;
+        border: 3px solid $body-bg;
+      }
+    }
+  }
+}
+// Story Content Scenarios
+#scenario-2,
+#scenario-3,
+#scenario-4,
+#scenario-5,
+#scenario-6 {
+  .content {
+    display: block;
+    padding: 4.0em 0 5.0em 0;
+    border-top: $navbar-height solid #FFF;
+    .btn-primary {
+      margin-top: 1.0em;
+    }
+    .btn-link {
+      padding-top: 30px !important;
+      font-weight: 300;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    .text-muted {
+      color: #999;
+      margin-top: 2.0em;
+      padding-left: 1.0em;
+      border-left: 3px solid;   
+    }
+    .img-sm {
+      float: left;
+      margin-bottom: -75px;
+      z-index: 7;
+      position: relative;
+    }
+    .img-md {
+      float: right;
+      margin-top: -105px;
+      z-index: 7;
+      position: relative;
+    }
+    .img-icon {
+      padding: 1.0em;
+      @include color-gradient-bg();
+      @include box-shadow();
+      border: 5px solid #f5f5f5;
+      height: 114px;
+      width: 114px;
+      border-radius: 50%;
+      margin-bottom: -75px;
+      text-align: center;
+      z-index: 7;
+      position: relative;
+      visibility: hidden;
+      img {
+        border: 0;
+        box-shadow: none;
+        width: 50px;
+        margin-top: 10px;
+      }
+    }
+    .col-md-5 {
+      margin-top: -50px
+    }
+    .col-md-7 {
+      visibility: hidden;
+    }
+    @media all and (max-width: $screen-md-min) {
+      margin: 0;
+      border-top: 0;
+      position: relative;
+      text-align: center;
+      padding: 40px 0 0 0;
+      height: auto;
+      .img-circle {
+        margin-bottom: 20px;
+      }
+      .btn-link {
+        display: none;
+      }
+      .text-muted {
+        border: none;
+        padding: 0;
+      }
+      .btn-link {
+        padding: 0;
+      }
+      .col-md-5 {
+        margin-top: 0;
+      }
+      .img-sm, 
+      .img-md,
+      .img-lg,
+      .img-icon,
+      .col-md-5,
+      .col-md-7 {
+        // Part of disabling animations on mobile
+        visibility: visible !important;
+      }
+    }
+  }
+  .technology {
+    top: 0;
+    z-index: 8;
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding: 8.0em 0 4.0em 0;
+    @include grayscale-gradient-bg();
+    h4 {
+      color: #999;
+      font-style: italic;
+      margin-top: -15px;
+    }
+    h3 {
+      color: $brand-primary;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+        a{
+          line-height: 2.25em;
+          display: block;
+          padding-left: 5px;
+          &:hover {
+            color: $body-bg;
+            background: $brand-primary;
+            text-decoration: none;
+            @include smooth-trans;
+          }
+        }
+      }
+    }
+    .close {
+      opacity: 1.0;
+      padding: 5px 5px 5px 5px;
+      right: 0;
+      margin-top: -40px;
+      top: $navbar-height;
+      margin-right: 20px;
+      text-shadow: none;
+      &:hover {
+        color: #CCC;
+        @include smooth-trans();
+      }
+    }
+    @media all and (max-width: $screen-md-min) {
+      top: 0;
+      z-index: 99;
+      height: 100%;
+      position: fixed;
+      margin-top: 0;
+      padding: 3.0em 0 0 0;
+      overflow-y: scroll; /* has to be scroll, not auto */
+      -webkit-overflow-scrolling: touch;
+      h4 {
+        position: absolute;
+        top: 0;
+        margin-top: -45px;
+        color: #FFF;
+        z-index: 9;
+      }
+      .close {
+        color: #FFF;
+        background: #000;
+        width: 100%;
+        margin: 0;
+        z-index: 9;
+        position: absolute;
+        top: 0;
+        text-align: right;
+        padding: 10px 25px 10px 0;
+        line-height: 35px;
+      }
+    }
+  }
+}
+// Downward Arrow In Between Scenarios
+#arrow.dark {
+  background: url("../images/arrow-dark.png") no-repeat;
+  background-size: 47px auto;
+  height: 126px;
+  width: 100%;
+  max-width: 160px;
+  text-align: center;
+  padding-top: 15px;
+  background-position: center bottom;
+  margin: 0 auto;
+  h3 {
+    background: #FFF;
+    border-bottom: 1px solid #CCC;
+    color: #999;
+    padding: 10px 10px;
+    font-size: .85em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    span {
+      font-weight: bold;
+      letter-spacing: 0;
+      display: block;
+    }
+  }
+  @media all and (max-width: $screen-md-min) {
+    margin-top: 2.0em;
+    opacity: 1.0;
+  }
+}
+// Decrease Margin Between Intro and First Story Content Scenario
+#scenario-2 {
+  .content {
+    @media all and (max-width: $screen-md-min) {
+      margin-top: -150px;
+    }
+  }
+}
+// Share / Signoff Slide
+#scenario-7 {
+  height: auto;
+  padding: 4.0em 0 15.0em 0;
+  background-image: url("../images/scenario-6-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  #arrow.up {
+    right: 0;
+    top: 0;
+    opacity: .5;
+    position: absolute;
+    top: 50%;
+    margin-top: -200px;
+    margin-right: 72px;
+    height: 400px;
+    display: none;
+    z-index: 9;
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    &:hover {
+      cursor: pointer;
+      opacity: .7;
+      @include smooth-trans();
+    }
+  }
+  .social {
+    font-size: 1.5em;
+    padding-top: 2.0em;
+    width: 100%;
+    max-width: 522px;
+    margin: 0 auto;
+    li:last-child {
+      padding-right: 0;
+    }
+    a {
+      height: 90px;
+      width: 90px;
+      text-align: center;
+      line-height: 90px;
+      border-radius: 50%;
+      color: $body-bg;
+      border: 1px solid $brand-primary;
+      background: $brand-primary;
+      @include smooth-trans;
+      display: inline-block;
+      &:hover {
+        text-decoration: none;
+        background: darken($brand-primary, 5%);
+      }
+    }
+  }
+  @media (max-width: $screen-md-min) {
+    padding: 0;
+    #arrow.up {
+      display: none;
+    }
+    .social {
+      li {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        a {
+          height: 40px; 
+          line-height: 40px;
+          border-radius: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
