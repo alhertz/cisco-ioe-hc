@@ -1,8 +1,8 @@
 $navbar-height: 84px;
-$brand-primary: #00adee;
+$brand-primary: #00b1ef;
 
-$gradient-light: #00adee;
-$gradient-dark: #0067ab;
+$gradient-light: #00b1ef;
+$gradient-dark: #95c94b;
 
 // Core variables and mixins
 @import 'sass-bootstrap/lib/variables';
@@ -109,8 +109,22 @@ h1,h2,h3,h4,h5, .lead {
 .btn-primary {
   font-weight: 300;
   border: none;
+  background: $brand-primary;
+  background: $brand-primary -webkit-linear-gradient(top,$brand-primary,#00a7ec 95%,#0096e8);
+  background: $brand-primary -moz-linear-gradient(top,$brand-primary,#00a7ec 95%,#0096e8);
+  background: $brand-primary -o-linear-gradient(top,$brand-primary,#00a7ec 95%,#0096e8);
+  background: $brand-primary linear-gradient(center top,$brand-primary 0,#00a7ec 95%,#0096e8 100%);
+  border: 1px solid #007de8;
+  border-bottom-color: #1d60dd;
+  border-top-color: #0a81d4;
+  -webkit-box-shadow: 0 1px 3px rgba(15,59,141,0.31),inset 0 1px 0 #00c1f0;
+  -moz-box-shadow: 0 1px 3px rgba(15,59,141,0.31),inset 0 1px 0 #00c1f0;
+  box-shadow: 0 1px 3px rgba(15,59,141,0.31),inset 0 1px 0 #00c1f0;
+  text-shadow: 0 1px 0 #0069de;
   &:hover {
-    background: $gradient-dark;
+    -webkit-box-shadow: 0 1px 6px rgba(15,59,141,0.31),inset 0 1px 0 #00c1f0;
+    -moz-box-shadow: 0 1px 6px rgba(15,59,141,0.31),inset 0 1px 0 #00c1f0;
+    box-shadow: 0 1px 6px rgba(15,59,141,0.31),inset 0 1px 0 #00c1f0;
     @include smooth-trans;
   }
 }
@@ -346,7 +360,7 @@ h1,h2,h3,h4,h5, .lead {
     display: none;
   }
   .content {
-    padding-top: 4.0em;
+    padding-top: 200px;
     .secondary-content {
       padding-top: 2.0em;
       .lead.text-muted {
@@ -437,6 +451,11 @@ h1,h2,h3,h4,h5, .lead {
         box-shadow: none;
         width: 50px;
         margin-top: 10px;
+      }
+      .fa {
+        color: #FFF;
+        font-size: 60px;
+        line-height: 70px;
       }
     }
     .col-md-5 {
