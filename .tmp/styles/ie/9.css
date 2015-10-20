@@ -1,5 +1,7 @@
 /* Disable Gradient BG on icon images in IE9 */
+
 .content .img-icon {
   background: #00908c !important;
+  -webkit-filter: none !important;
   filter: none !important;
 }

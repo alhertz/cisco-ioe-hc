@@ -1,7 +1,9 @@
 /* Disable Text Gradients on IE10 */
+
 .text-gradient {
   color: #00908c !important;
+  -webkit-filter: none !important;
   filter: none !important;
-  background: #FFF !important; 
+  background: #FFF !important;
   background-image: none !important;
 }
